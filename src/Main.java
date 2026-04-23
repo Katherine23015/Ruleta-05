@@ -1,15 +1,29 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+package cl.ufrontera.ruleta;
+
+import cl.ufrontera.ruleta.modelo.Usuario;
+import cl.ufrontera.ruleta.logica.Ruleta;
+import cl.ufrontera.ruleta.vista.VistaHistorial;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Usuario jugador = new Usuario("Pepe");
+        Ruleta ruleta = new Ruleta();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        System.out.println("--- Iniciando Juego ---");
+        ruleta.girar(jugador, 500, "ROJO");
+        ruleta.girar(jugador, 1000, "NEGRO");
+        ruleta.girar(jugador, 200, "ROJO");
+
+
+        int totalJugadas = jugador.getHistorial().size();
+        System.out.println("Jugadas guardadas en memoria: " + totalJugadas);
+
+        if (totalJugadas > 0) {
+            System.out.println("Abriendo ventana con datos...");
+            new VistaHistorial(jugador);
+        } else {
+            System.out.println("ERROR: No se puede abrir la vista porque no hay datos.");
         }
     }
 }
+
